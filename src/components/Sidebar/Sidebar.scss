@@ -1,0 +1,15 @@
+.sidebar {
+    position: fixed;
+    height: 100%;
+    width: 4rem;
+    top: 0;
+    right: 0;
+
+    background-color: burlywood;
+    transition: width;
+    transition-duration: 200ms;
+
+    &--open {
+        width: 20rem;
+    }
+}

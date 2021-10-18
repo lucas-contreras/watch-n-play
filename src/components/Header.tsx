@@ -1,17 +1,18 @@
 import React from 'react';
+import './Header.scss';
 
 interface HeaderProps {
-    children?: React.ReactNode,
+    title?: string,
 }
 
-export default function Header(
-{ children }: HeaderProps,
-):JSX.Element {
+const css = {
+    container: 'header',
+};
+
+export default function Header({ title }: HeaderProps):JSX.Element {
     return (
-        <header>
-            <h1>
-                {children}
-            </h1>
+        <header className={css.container}>
+            <h1>{title}</h1>
         </header>
     );
 }

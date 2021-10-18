@@ -1,0 +1,15 @@
+.header {
+    position: fixed;
+    width: calc(100% - 4rem);
+    height: 4rem;
+    top: 0;
+    left: 0;
+
+    text-align: center;
+
+    background-color: beige;
+
+    & h1 {
+        margin: 0;
+    }
+}

@@ -6,8 +6,15 @@
     left: 0;
 
     text-align: center;
-
     background-color: beige;
+    
+    transition: width;
+    transition-duration: 200ms;
+    z-index: 900;
+    
+    &--sidebar-open {
+        width: calc(100% - 20rem);
+    }
 
     & h1 {
         margin: 0;

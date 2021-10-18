@@ -6,6 +6,7 @@ import { useAppProvider } from "../../providers/AppProvider";
 import './Sidebar.scss';
 
 interface SidebarProps {
+    sidebarOpen: boolean;
     children?: React.ReactNode;
 }
 
@@ -13,8 +14,8 @@ const css = {
     container: 'sidebar',
 };
 
-export default function Sidebar({ children }: SidebarProps): JSX.Element {
-    const { sidebarOpen, toggleSidebar } = useAppProvider();
+export default function Sidebar({ children, sidebarOpen }: SidebarProps): JSX.Element {
+    const { toggleSidebar } = useAppProvider();
 
     const toggleHandler = useCallback(() => {
         toggleSidebar(!sidebarOpen);
@@ -25,7 +26,7 @@ export default function Sidebar({ children }: SidebarProps): JSX.Element {
     });
 
     return (
-        <section className={sidebarClasses}>
+        <section className={sidebarClasses} aria-label='Trivia questions'>
             <button onClick={toggleHandler}>{sidebarOpen ? 'close': 'open'}</button>
             {sidebarOpen ? children : null}
         </section>

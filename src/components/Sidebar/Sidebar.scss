@@ -8,6 +8,7 @@
     background-color: burlywood;
     transition: width;
     transition-duration: 200ms;
+    z-index: 1000;
 
     &--open {
         width: 20rem;

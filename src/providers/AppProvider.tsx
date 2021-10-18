@@ -1,8 +1,11 @@
 import React, { useContext, useMemo, useState } from "react";
+import { QuestionInfo } from "../types/Question";
 
 export interface AppProviderContextProps {
-    sidebarOpen: boolean,
-    toggleSidebar: (value: boolean) => void,
+    sidebarOpen: boolean;
+    currentQuestion?: QuestionInfo;
+    toggleSidebar: (value: boolean) => void;
+    setCurrentQuestion: (question: QuestionInfo) => void;
 }
 
 interface AppProviderProps {
@@ -11,18 +14,26 @@ interface AppProviderProps {
 
 const AppContext = React.createContext<AppProviderContextProps>({
     sidebarOpen: false,
-    toggleSidebar: (value: boolean) => undefined,
+    toggleSidebar: () => {},
+    setCurrentQuestion: () => {},
 });
 
 export function useAppProvider(): AppProviderContextProps {
-    return useContext(AppContext)
+    return useContext(AppContext);
 }
 
 export default function AppProvider({ children }: AppProviderProps): JSX.Element {
     const [sidebarOpen, toggleSidebar] = useState(false);
+    const [currentQuestion, setCurrentQuestion] = useState<QuestionInfo | undefined>(undefined);
+
     const value = useMemo(() => {
-        return ({ sidebarOpen, toggleSidebar })
-    }, [sidebarOpen]);
+        return ({ 
+            sidebarOpen,
+            currentQuestion,
+            toggleSidebar,
+            setCurrentQuestion,
+        });
+    }, [sidebarOpen, currentQuestion]);
     
     return (
         <AppContext.Provider value={value}>

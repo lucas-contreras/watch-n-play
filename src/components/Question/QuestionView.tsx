@@ -20,15 +20,20 @@ const css = {
 }
 
 export default function QuestionView({ data }: QuestionViewProps): JSX.Element {
-    const { setCurrentQuestion } = useAppProvider();
+    const { currentQuestion, toggleSidebar, setCurrentQuestion } = useAppProvider();
     const { id, title, questions } = data;
 
     const clickHandle = useCallback(() => {
+        // toggleSidebar(false);
         setCurrentQuestion(data);
     }, [setCurrentQuestion]);
 
+    const liClass = classNames(css.container, {
+        [`${css.container}--current`]: currentQuestion?.id === id,
+    });
+
     return (
-        <li className={css.container}>
+        <li className={liClass}>
             <div className={css.questionsList}>
                 <h4>{title}</h4>
                 {questions.map((q) => {

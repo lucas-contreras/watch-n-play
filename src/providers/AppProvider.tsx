@@ -5,7 +5,7 @@ export interface AppProviderContextProps {
     sidebarOpen: boolean;
     currentQuestion?: QuestionInfo;
     toggleSidebar: (value: boolean) => void;
-    setCurrentQuestion: (question: QuestionInfo) => void;
+    setCurrentQuestion: (question?: QuestionInfo) => void;
 }
 
 interface AppProviderProps {

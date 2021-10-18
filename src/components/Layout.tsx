@@ -6,6 +6,7 @@ import Sidebar from './Sidebar/Sidebar';
 import QuestionList from './Question/QuestionList';
 import Popover from './Popover/Popover';
 // import ContentIframe from './ContentIframe';
+import QuestionProvider from '../providers/QuestionProvider';
 import { useAppProvider } from '../providers/AppProvider';
 
 import './Layout.scss';
@@ -26,7 +27,9 @@ export default function Layout(): JSX.Element {
         <div className={css.container}>
             <Header title="Trivia questions" sidebarOpen={sidebarOpen} />
             <Sidebar sidebarOpen={sidebarOpen}>
-                <QuestionList />
+                <QuestionProvider>
+                    <QuestionList />
+                </QuestionProvider>
             </Sidebar>
             <main className={css.main}>
                 {/* <ContentIframe href="https://www.youtube.com/embed/O5e2JE_Kzh4" /> */}

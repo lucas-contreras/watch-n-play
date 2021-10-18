@@ -13,6 +13,10 @@
     &-footer {
         display: flex;
     }
+
+    &--current {
+        border-left: 4px solid black;
+    }
 }
 
 .question-view__label {
@@ -33,16 +37,4 @@
 .question-view-footer__button-trash {
     margin-left: auto;
     margin-right: 5px;
-}
-
-.test1 {
-    
-
-    &::after{
-    //     content: '|||||';
-    //     background-image: url('../assets/check-mark.svg');
-    //     background-position: center;
-    //     background-repeat: no-repeat;
-    //     background-color: transparent;
-    }
 }

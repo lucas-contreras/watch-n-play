@@ -1,9 +1,24 @@
 .popover-container {
-    background-color: white;
     position: fixed;
+    display: flex;
+    height: 100%;
+    top: 4rem;
 
-    bottom: 0;
-    margin-bottom: 5rem;
+    &__header {
+        color: white;
+        text-align: center;
+    }
 
-    width: 50%;
+    &__wrapper {
+        background-color: rgba(140,230, 20, .5);
+        width: 25rem;
+        margin-top: auto;
+        margin-bottom: 10rem;
+        border-radius: 4px;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: space-around;
+    }
 }

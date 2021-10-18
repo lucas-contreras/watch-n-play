@@ -1,32 +1,26 @@
 import React from "react";
-import { QuestionInfo } from "../../types/Question";
 import QuestionView from "./QuestionView";
+import { useQuestionProvider } from "../../providers/QuestionProvider";
+import { useAppProvider } from "../../providers/AppProvider";
 
 import './QuestionList.scss';
-
 
 const css = {
     container: 'question-list',
 }
 
-// get from somewhere else
-const data: QuestionInfo[] = [
-    {id: 1, title: 'how to...', questions: [
-        { question: '100', isCorrect: false },
-        { question: '200', isCorrect: true },
-    ]},
-    {id: 2, title: 'another question', questions: [
-        { question: 'yes', isCorrect: true },
-        { question: 'no', isCorrect: false },
-    ]},
-];
-
 export default function QuestionList(): JSX.Element {
-    
+    const { loading, questions } = useQuestionProvider();
+    const { sidebarOpen } = useAppProvider();
+
+    if (loading) {
+        return <div>loading...</div>
+    }
+
     return (
-        <ul className={css.container}>
+        <ul className={css.container} style={{ display: `${sidebarOpen ? 'block': 'none'}`}}>
             <li><h3>Trivia questions</h3></li>
-            {data.map((d) => {
+            {questions.map((d) => {
                 return (
                     <QuestionView data={d} key={d.id} />
                 )

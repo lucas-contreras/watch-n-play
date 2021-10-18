@@ -28,7 +28,9 @@ export default function Sidebar({ children, sidebarOpen }: SidebarProps): JSX.El
     return (
         <section className={sidebarClasses} aria-label='Trivia questions'>
             <button onClick={toggleHandler}>{sidebarOpen ? 'close': 'open'}</button>
-            {sidebarOpen ? children : null}
+            {/* fetch to question endpoint everytime that it renders*/}
+            {/* {sidebarOpen ? children : null} */}
+            {children}
         </section>
     )
 }

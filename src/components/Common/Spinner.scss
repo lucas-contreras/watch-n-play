@@ -1,0 +1,11 @@
+.spinner {
+	position: relative;
+	animation: .6s linear 0s infinite normal forwards running spinner-rotation;
+}
+
+@keyframes spinner-rotation {
+
+	100% {
+		transform: rotate(360deg);
+	}
+}

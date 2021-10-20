@@ -1,5 +1,6 @@
 
-export interface QuestionType {
+export interface AnswerType {
+    id: string;
     question: string;
     isCorrect?: boolean;
     selected?: boolean;
@@ -8,5 +9,5 @@ export interface QuestionType {
 export interface QuestionInfo {
     id: number,
     title: string;
-    questions: QuestionType[];
+    answers: AnswerType[];
 }

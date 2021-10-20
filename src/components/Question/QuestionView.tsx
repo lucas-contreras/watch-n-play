@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import Edit from '../assets/edit.svg';
 import Trash from '../assets/trash.svg';
-import CheckMark from '../assets/check-mark.svg';
+import CheckMarkIcon from "../assets/CheckMarkIcon";
 import { QuestionInfo } from "../../types/Question";
 import { useAppProvider } from "../../providers/AppProvider";
 
@@ -19,12 +19,17 @@ const css = {
     buttonTrash: 'question-view-footer__button-trash',
 }
 
-export default function QuestionView({ data }: QuestionViewProps): JSX.Element {
-    const { currentQuestion, toggleSidebar, setCurrentQuestion } = useAppProvider();
-    const { id, title, questions } = data;
+export default function QuestionView({ data }: QuestionViewProps): JSX.Element | null {
+    const { dataQuestion } = useAppProvider();
+    const { id, title, answers } = data;
+
+    if (!dataQuestion) {
+        return null;
+    }
+
+    const { currentQuestion, setCurrentQuestion } = dataQuestion;
 
     const clickHandle = useCallback(() => {
-        // toggleSidebar(false);
         setCurrentQuestion(data);
     }, [setCurrentQuestion]);
 
@@ -36,16 +41,20 @@ export default function QuestionView({ data }: QuestionViewProps): JSX.Element {
         <li className={liClass}>
             <div className={css.questionsList}>
                 <h4>{title}</h4>
-                {questions.map((q) => {
+                {answers.map((a) => {
                     const qClass = classNames(css.question, {
-                        [`${css.question}--correct`]: q.isCorrect,
+                        [`${css.question}--correct`]: a.isCorrect,
+                        [`${css.question}--selected`]: a.selected,
                     });
 
                     return (
-                        <label key={q.question} className={qClass}>
-                            {q.question}
-                            {q.isCorrect ? (
-                                <img src={CheckMark} alt={q.question} />
+                        <label 
+                            key={a.question}
+                            className={qClass} 
+                        >
+                            {a.question}
+                            {a.isCorrect ? (
+                                <CheckMarkIcon color='#02661c' />
                             ): null}
                         </label>
                     )

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useAppProvider } from "../../providers/AppProvider";
-import { QuestionType } from "../../types/Question";
+import { QuestionInfo, AnswerType } from "../../types/Question";
 
 import './Popover.scss';
 
@@ -13,10 +13,14 @@ const css = {
 }
 
 export default function Popover(): JSX.Element | null {
-    const { currentQuestion, setCurrentQuestion } = useAppProvider();
-    const clickHandle = useCallback((q: QuestionType) => {
-        setCurrentQuestion(undefined);
-    }, [setCurrentQuestion]);
+    const { dataQuestion } = useAppProvider();
+    const { currentQuestion, updateQuestion } = dataQuestion;
+
+    const clickHandle = useCallback((a: AnswerType) => {
+        if (currentQuestion) {
+            updateQuestion({...a, selected: true});
+        }
+    }, [updateQuestion]);
 
     if (!currentQuestion) {
         return null;
@@ -25,9 +29,9 @@ export default function Popover(): JSX.Element | null {
     return (
         <div className={css.container}>
             <div className={css.wrapper}>
-                <h2 className={css.header}>{currentQuestion.title}</h2>
+                <h2 className={css.header}>{currentQuestion?.title}</h2>
                 <div className={css.footer}>
-                    {currentQuestion.questions.map((q) => {
+                    {currentQuestion?.answers.map((q) => {
                         return (
                             <button
                                 key={q.question}

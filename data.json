@@ -3,25 +3,25 @@
 		{
 			"id": 1,
 			"title": "how to...",
-			"questions": [
-				{ "question": "100", "isCorrect": false },
-				{ "question": "200", "isCorrect": true }
+			"answers": [
+				{ "id": "1a", "question": "100", "isCorrect": false },
+				{ "id": "1b", "question": "200", "isCorrect": true }
 			]
 		},
 		{
 			"id": 2,
 			"title": "another",
-			"questions": [
-				{ "question": "yes", "isCorrect": false },
-				{ "question": "no", "isCorrect": true }
+			"answers": [
+				{ "id": "2a", "question": "yes", "isCorrect": false },
+				{ "id": "2b", "question": "no", "isCorrect": true }
 			]
 		},
 		{
 			"id": 3,
 			"title": "is that true?",
-			"questions": [
-				{ "question": "maybe", "isCorrect": true },
-				{ "question": "agree", "isCorrect": false }
+			"answers": [
+				{ "id": "3a", "question": "maybe", "isCorrect": true },
+				{ "id": "3c", "question": "idk", "isCorrect": false }
 			]
 		}
 	]

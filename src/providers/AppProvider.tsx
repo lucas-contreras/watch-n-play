@@ -1,11 +1,10 @@
-import React, { useContext, useMemo, useState } from "react";
-import { QuestionInfo } from "../types/Question";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import useQuestions, { UseQuestionsOutput, questionInitialState} from "../hooks/useQuestions";
 
 export interface AppProviderContextProps {
     sidebarOpen: boolean;
-    currentQuestion?: QuestionInfo;
-    toggleSidebar: (value: boolean) => void;
-    setCurrentQuestion: (question?: QuestionInfo) => void;
+    dataQuestion: UseQuestionsOutput;
+    setOpenSidebar: (value: boolean) => void;
 }
 
 interface AppProviderProps {
@@ -14,8 +13,8 @@ interface AppProviderProps {
 
 const AppContext = React.createContext<AppProviderContextProps>({
     sidebarOpen: false,
-    toggleSidebar: () => {},
-    setCurrentQuestion: () => {},
+    dataQuestion: questionInitialState,
+    setOpenSidebar: (value: boolean) => undefined,
 });
 
 export function useAppProvider(): AppProviderContextProps {
@@ -23,17 +22,22 @@ export function useAppProvider(): AppProviderContextProps {
 }
 
 export default function AppProvider({ children }: AppProviderProps): JSX.Element {
-    const [sidebarOpen, toggleSidebar] = useState(false);
-    const [currentQuestion, setCurrentQuestion] = useState<QuestionInfo | undefined>(undefined);
+    const [sidebarOpen, setOpenSidebar] = useState(false);
+    const [dataQuestion, setDataCuestion] = useState<UseQuestionsOutput>(questionInitialState);
+
+    const questionResult = useQuestions(sidebarOpen);
+    
+    useEffect(() => {
+        setDataCuestion(questionResult);
+    }, [questionResult]);
 
     const value = useMemo(() => {
         return ({ 
             sidebarOpen,
-            currentQuestion,
-            toggleSidebar,
-            setCurrentQuestion,
+            dataQuestion,
+            setOpenSidebar,
         });
-    }, [sidebarOpen, currentQuestion]);
+    }, [sidebarOpen, dataQuestion]);
     
     return (
         <AppContext.Provider value={value}>

@@ -1,25 +1,21 @@
 import React, { useCallback } from "react";
 import classNames from "classnames";
 
+import QuestionList from "../Question/QuestionList";
 import { useAppProvider } from "../../providers/AppProvider";
 
 import './Sidebar.scss';
-
-interface SidebarProps {
-    sidebarOpen: boolean;
-    children?: React.ReactNode;
-}
 
 const css = {
     container: 'sidebar',
 };
 
-export default function Sidebar({ children, sidebarOpen }: SidebarProps): JSX.Element {
-    const { toggleSidebar } = useAppProvider();
+export default function Sidebar(): JSX.Element {
+    const { sidebarOpen, setOpenSidebar } = useAppProvider();
 
     const toggleHandler = useCallback(() => {
-        toggleSidebar(!sidebarOpen);
-    }, [toggleSidebar, sidebarOpen]);
+        setOpenSidebar(!sidebarOpen);
+    }, [sidebarOpen, setOpenSidebar]);
 
     const sidebarClasses = classNames(css.container, {
         [`${css.container}--open`]: sidebarOpen,
@@ -28,9 +24,7 @@ export default function Sidebar({ children, sidebarOpen }: SidebarProps): JSX.El
     return (
         <section className={sidebarClasses} aria-label='Trivia questions'>
             <button onClick={toggleHandler}>{sidebarOpen ? 'close': 'open'}</button>
-            {/* fetch to question endpoint everytime that it renders*/}
-            {/* {sidebarOpen ? children : null} */}
-            {children}
+            {sidebarOpen ? <QuestionList /> : null}
         </section>
     )
 }

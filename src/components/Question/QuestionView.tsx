@@ -65,7 +65,7 @@ export default function QuestionView({ data }: QuestionViewProps): JSX.Element |
                 <button className={css.buttonTrash}>
                     <img src={Trash} alt="" />
                 </button>
-                <button>
+                <button onClick={() => dataQuestion.setEditQuestion(data)}>
                     <img src={Edit} alt="" />
                 </button>
             </div>

@@ -8,18 +8,22 @@ export const questionInitialState: UseQuestionsOutput = {
     questions: [],
     updateQuestion: (answer: AnswerType) => undefined,
     setCurrentQuestion: (question?: QuestionInfo) => undefined,
+    setEditQuestion: (question?: QuestionInfo) => undefined,
 }
 
 export interface UseQuestionsOutput {
     currentQuestion?: QuestionInfo,
+    editQuestion?: QuestionInfo,
     questions: QuestionInfo[],
     loading: boolean,
     updateQuestion: (answer: AnswerType) => void,
     setCurrentQuestion: (question?: QuestionInfo) => void,
+    setEditQuestion: (question?: QuestionInfo) => void,
 }
 
 export default function useQuestions(fetching?: boolean): UseQuestionsOutput {
     const [currentQuestion, setCurrentQuestion] = useState<QuestionInfo | undefined>(undefined);
+    const [editQuestion, setEditQuestion] = useState<QuestionInfo | undefined>(undefined);
     const [questions, setQuestions] = useState<QuestionInfo[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -29,7 +33,7 @@ export default function useQuestions(fetching?: boolean): UseQuestionsOutput {
         }
 
         const newAnswers = currentQuestion.answers.map((a) => {
-            return (a.id === answer.id) ? answer : ({...a, selected: false});
+            return (a.id === answer.id) ? answer : ({ ...a, selected: false });
         });
 
         const newQuestions = [...questions];
@@ -40,7 +44,7 @@ export default function useQuestions(fetching?: boolean): UseQuestionsOutput {
         setCurrentQuestion(undefined);
     }, [currentQuestion]);
 
-    const fetchQuestions = useCallback(async() => {
+    const fetchQuestions = useCallback(async () => {
         const response = await fetch(url1).then((res) => res.json());
 
         setLoading(false)
@@ -59,9 +63,11 @@ export default function useQuestions(fetching?: boolean): UseQuestionsOutput {
 
     return useMemo(() => ({
         currentQuestion,
+        editQuestion,
         questions,
         loading,
         updateQuestion,
         setCurrentQuestion,
-    }), [currentQuestion, questions, loading]);
+        setEditQuestion,
+    }), [currentQuestion, editQuestion, questions, loading]);
 }

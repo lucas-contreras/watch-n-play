@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import useQuestions, { UseQuestionsOutput, questionInitialState} from "../hooks/useQuestions";
+import useQuestions, { UseQuestionsOutput, questionInitialState } from "../hooks/useQuestions";
 
 export interface AppProviderContextProps {
     sidebarOpen: boolean;

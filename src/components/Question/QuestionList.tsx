@@ -1,12 +1,15 @@
+import './QuestionList.scss';
+
 import React from "react";
 import QuestionView from "./QuestionView";
-import { useAppProvider } from "../../providers/AppProvider";
-
-import './QuestionList.scss';
+import QuestionAdd from "./QuestionAdd";
 import Spinner from "../Common/Spinner";
+
+import { useAppProvider } from "../../providers/AppProvider";
 
 const css = {
     container: 'question-list',
+    bodyQuestions: 'question-list__body',
 }
 
 export default function QuestionList(): JSX.Element | null {
@@ -19,11 +22,13 @@ export default function QuestionList(): JSX.Element | null {
     return (
         <ul className={css.container}>
             <li><h3>Trivia questions</h3></li>
-            {dataQuestion.questions.map((d) => {
-                return (
-                    <QuestionView data={d} key={d.id} />
-                )
-            })} 
+            <div className={css.bodyQuestions}>
+                {dataQuestion.questions.map((d) => {
+                    return (
+                        <QuestionView data={d} key={d.id} />
+                    );
+                })}
+            </div>
         </ul>
     );
 }
